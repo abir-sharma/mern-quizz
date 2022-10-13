@@ -21,10 +21,10 @@ app.use("/api/v1",user)
 app.use("/api/v1",admin)
 
 
-// app.use(express.static(path.join(__dirname,"../frontendd/build")))
-// app.get("*",(req,res)=>{
-//     res.sendFile(path.resolve(__dirname,"../frontendd/build/index.html"))
-// })
+app.use(express.static(path.join(__dirname,"../frontend/build")))
+app.get("*",(req,res)=>{
+    res.sendFile(path.resolve(__dirname,"../frontend/build/index.html"))
+})
 
 app.use(errorMiddleware)
 
