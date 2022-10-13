@@ -12,3 +12,4 @@ Database -
              {question:"test question 1 ?", optiions:[3,5,6,7], answeers:[2,3], difficulty:10},
            ]
 Postman collection - https://www.getpostman.com/collections/e7e985d851ad12735713
+All routes are auth protected with some routes only for admin.
