@@ -1,6 +1,5 @@
 const catchAsyncError=require("../middleware/catchAsyncErrors")
 const Quizz=require("../models/quizz")
-const sendToken=require("../utils/jwtToken")
 
 exports.createQuizz=catchAsyncError(async(req,res,next)=>{
     const {quizname,quizdescription,questions}=req.body
