@@ -5,7 +5,7 @@ const router=express.Router()
 
 router.route("/createQuizz").post(isAuthenticatedUser,authorizeRoles("admin"), createQuizz)
 router.route("/getQuizzes").get(isAuthenticatedUser, getQuizzes)
-router.route("/quizz/:id").get(isAuthenticatedUser,authorizeRoles("admin"),getQuizzDetails)
+router.route("/quizz/:id").get(isAuthenticatedUser,getQuizzDetails)
 
 
 module.exports=router

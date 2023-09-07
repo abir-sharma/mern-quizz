@@ -10,10 +10,10 @@ const Register = () => {
     (state) => state.appInfo
   );
   const [formData,setFormData]=useState({name:"",email:"",password:""})
-  const handleSubmit=async(event)=>{
-    event.preventDefault()
-    dispatch(registerUser(formData))
-  }
+  const handleSubmit=(event)=>{
+    event.preventDefault();
+    dispatch(registerUser(formData)) 
+}
   function handleChange(event){
     setFormData({...formData,[event.target.name]:event.target.value})
   }
@@ -23,7 +23,7 @@ const Register = () => {
 <main class="form-signin w-50 m-auto">
   <form>
     <img class="mb-4" src={pic} alt="" width="72" height="57"/>
-    <h1 class="h3 mb-3 fw-normal">Please Register in</h1>
+    <h1 class="h3 mb-3 fw-normal">Please Register</h1>
 
     <div class="form-floating">
       <input type="name" class="form-control my-2" id="floatingInput" placeholder="xyz"
@@ -59,7 +59,7 @@ const Register = () => {
 
 
     
-  
+
 
 </div>
   )

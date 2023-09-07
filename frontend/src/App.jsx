@@ -18,9 +18,9 @@ function App() {
    <Navbar />
    <Routes>
    <Route exact path="/" element={<Home />}/>
-   <Route  path="/register" element={<Register />}/>
-   <Route  path="/login" element={<Login />}/>
-   <Route  path="/admin" element={<Admin />}/>
+   <Route path="/register" element={<Register />}/>
+   <Route path="/login" element={<Login />}/>
+   <Route path="/admin" element={<Admin />}/>
    <Route path="/quizz/:id" element={<Quizz/>}/>
    <Route path="/createQuizz" element={<CreateQuizz/>}/>
    <Route path="/playQuizz/:id" element={<PlayQuizz/>}/>

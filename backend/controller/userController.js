@@ -1,8 +1,27 @@
 const catchAsyncError=require("../middleware/catchAsyncErrors")
 const User=require("../models/User")
+const userVerification=require("../models/userVerification")
 const ErrorHandler = require("../utils/errorHandler")
 const sendToken=require("../utils/jwtToken")
+const nodemailer=require("nodemailer")
+const {v4:uuidv4}=require("uuid")
+require("dotenv").config()
 
+let transporter=nodemailer.createTransport({
+    service:"gmail",
+    auth:{
+        user:process.env.Auth_EMAIL,
+        pass:process.env.Auth_PASS,
+    }
+})
+transporter.verify((error,success)=>{
+    if(error) {
+        console.log(error)
+    } else {
+        console.log('Ready for message !')
+        console.log(success)
+    }
+})
 exports.registerUser=catchAsyncError(async(req,res,next)=>{
     const {name,email,password}=req.body
     const user=await User.create({

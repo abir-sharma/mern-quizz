@@ -1,27 +1,24 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { useState,useEffect } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { getQuizzD } from '../../actions/userActions'
 import { useParams } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
+import Result from '../result/Result'
 
-const Instructions= () =>{
+const Instructions= ({isO}) =>{
     return (
         <>
-        <div class="modal modal-sheet position-static d-block bg-secondary py-5" tabindex="-1" role="dialog" id="modalSheet">
+        <div class="modal modal-sheet position-static d-block  py-5" tabindex="-1" role="dialog" id="modalSheet">
   <div class="modal-dialog" role="document">
     <div class="modal-content rounded-4 shadow">
       <div class="modal-header border-bottom-0">
-        <h1 class="modal-title fs-5">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h1 class="modal-title fs-5">Instructions</h1>
       </div>
       <div class="modal-body py-0">
-        <p>This is a modal sheet, a variation of the modal that docs itself to the bottom of the viewport like the newer share sheets in iOS.</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis corrupti ducimus iure expedita voluptatibus eum sed rem? Veniam aperiam esse minus nobis facilis, minima porro. Adipisci ab accusantium doloremque. Nemo?.</p>
       </div>
       <div class="modal-footer flex-column border-top-0">
-        <button type="button" class="btn btn-lg btn-primary w-100 mx-0 mb-2">Save changes</button>
-        <button type="button" class="btn btn-lg btn-light w-100 mx-0" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-lg btn-primary w-100 mx-0" data-bs-dismiss="modal" onClick={isO} >Close</button>
       </div>
     </div>
   </div>
@@ -29,32 +26,42 @@ const Instructions= () =>{
         </>
     )
 }
-
 const PlayQuizz = () => {
   const {id}=useParams()
   const dispatch=useDispatch()
-  const navigate=useNavigate()
   useEffect(() => {
     dispatch(getQuizzD(id))
   }, [id])
-  const [difficultyLevel,setDifficultyLevel] = useState(2)
+  const [difficultyLevel,setDifficultyLevel] = useState(1)
+  const [result,setResult]=useState(false)
+  const [message,setMessage]=useState("")
   const [score,setScore] = useState([0])
   const [ans,setAns]=useState([])
+  const [isOpen,setIsOpen]=useState(true)
+
   const [checked, setChecked] = useState([]);
   const { quizzDetails } = useSelector(
     (state) => state.appInfo
   );
+  if(quizzDetails === undefined) {return}
   function handleAns(event){
     var updatedList = [...checked];
     if (event.target.checked) {
-    updatedList = [...checked,Number(event.target.value)];
+    updatedList = [...checked,event.target.name];
   } else {
-    updatedList.splice(checked.indexOf(event.target.value), 1);
+    updatedList.splice(checked.indexOf(event.target.name), 1);
   }
   setChecked(updatedList);
   }
-  const q=quizzDetails.quizz.questions[difficultyLevel-1]
-  const correctAns=quizzDetails.quizz.questions[difficultyLevel-1].ans
+  function isOpenn() {
+    setIsOpen(false)
+  }
+  if (!quizzDetails.quizz){
+    return null
+  }
+  const q=quizzDetails.quizz.questions[difficultyLevel]
+  const correctAns=quizzDetails.quizz.questions[difficultyLevel].answers
+  
   function Right(correctAns,checked){
     if (correctAns === checked) return true;
     if (correctAns == null || checked == null) return false;
@@ -65,31 +72,39 @@ const PlayQuizz = () => {
   }
   return true;
   }
+  const lastScore=score[score.length-1]
   const next=async(event)=>{
     event.preventDefault()
     if (Right(correctAns,checked)) {
-      if (difficultyLevel==2) {
-        navigate("/result")
+      if (difficultyLevel===2) {
+        setResult(true)
+        setMessage("You passed the test !!!")
       }
-      setDifficultyLevel(difficultyLevel+1)
-      setScore([...score,score[score.length-1]+5])
+      if (difficultyLevel<=1){
+        setDifficultyLevel(difficultyLevel+1)
+      }
+      setScore([...score,lastScore+5])
     }
     else {
-      if (difficultyLevel==0) {
-        navigate("/result")
+      if (difficultyLevel===0) {
+        setResult(true)
+        setMessage("You failed the test !")
       }
-      setDifficultyLevel(difficultyLevel-1)
-      setScore([...score,score[score.length-1]-2])
+      if (difficultyLevel>=1) {
+        setDifficultyLevel(difficultyLevel-1)
+      }
+      setScore([...score,lastScore-2])
     }
     
   }
-  console.log(score,"score")
+  
   return (
     <>
-    <div className="container my-4">
+    {isOpen && <Instructions isO={isOpenn} /> }
+    {!result && <div className="container my-4">
         <div className="question">
             <h4>Q. {q.question} ?</h4>
-            <b>Difficulty level : {difficultyLevel}</b>
+            <b>Difficulty level : {difficultyLevel+1}</b>
         </div>
        
 
@@ -119,7 +134,9 @@ const PlayQuizz = () => {
 </div>
 
         <button class=" btn btn-sm btn-danger" type="submit" onClick={next} >Next</button>
-    </div>
+        <h3>Score : {lastScore}</h3>
+    </div>}
+    {result && <Result mess={message} sco={score} />}
     </>
   )
 }

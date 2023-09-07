@@ -53,7 +53,10 @@ export const createquizz=(quizData)=>async(dispatch)=>{
             payload:data
         })
     } catch (error) {
-        console.log(error.message)
+        dispatch({
+            type: "createQuizz",
+            payload: error.response.data,
+          });
     }
 }
 

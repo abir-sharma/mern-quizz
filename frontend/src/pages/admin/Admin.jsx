@@ -1,21 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch,useSelector } from 'react-redux'
-import { useState,useEffect } from 'react'
 import { getquizzes } from '../../actions/userActions'
+import { useEffect } from 'react'
 
 const Admin = () => {
-  const dispatch=useDispatch()
   const { quizzes } = useSelector(
     (state) => state.appInfo
   );
+  const dispatch=useDispatch()
   useEffect(() => {
     dispatch(getquizzes())
   }, [])
   return (
     <>    
     <h3 className='text-center my-4'>Quizzes</h3>
-    {quizzes.quizzes.map(quizz=><div className="container my-2">
+    {quizzes.quizzes && quizzes.quizzes.map(quizz=><div className="container my-2">
     <ol class="list-group list-group">
   <li class="list-group-item d-flex justify-content-between align-items-start">
     <div class="ms-2 me-auto">
@@ -28,7 +28,7 @@ const Admin = () => {
 </Link>
   </li>
 </ol>
-    </div>)}
+    </div>)}    
     <div className="container">
     <Link to="/createQuizz" ><button class="btn btn-lg btn-primary my-2 mx-2" type="submit">Create quizz</button>
 </Link>

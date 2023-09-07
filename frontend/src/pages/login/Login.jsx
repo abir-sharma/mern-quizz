@@ -1,7 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { useDispatch,useSelector } from 'react-redux'
-import { useState,useEffect } from 'react'
+import { useState} from 'react'
 import { getquizzes, loginUser } from '../../actions/userActions'
 import { useNavigate } from 'react-router-dom'
 import  pic from "../../img/pic.webp"
