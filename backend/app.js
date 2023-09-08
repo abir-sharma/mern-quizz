@@ -8,14 +8,14 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(cors())
-const errorMiddleware=require('./backend/middleware/error')
+const errorMiddleware=require("./middleware/error")
 
 if (process.env.NODE_ENV!=="PRODUCTION"){
     require("dotenv").config({path:"config/config.env"})
 }
 
-const user=require("./backend/routes/userRoute")
-const admin=require("./backend/routes/adminRoute")
+const user=require("./routes/userRoute")
+const admin=require("./routes/adminRoute")
 
 app.use("/api/v1",user)
 app.use("/api/v1",admin)
