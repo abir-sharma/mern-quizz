@@ -1,5 +1,5 @@
 const catchAsyncError=require("../middleware/catchAsyncErrors")
-const User=require("../models/User")
+const User=require("../models/user")
 const userVerification=require("../models/userVerification")
 const ErrorHandler = require("../utils/errorHandler")
 const sendToken=require("../utils/jwtToken")
