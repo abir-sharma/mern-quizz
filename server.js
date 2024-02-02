@@ -1,4 +1,5 @@
 const app=require("./app")
+const path=require('path')
 const connectDatabase=require("./backend/config/database")
 process.on("uncaughtException",(err)=>{
     console.log(`Error: ${err.message}`)

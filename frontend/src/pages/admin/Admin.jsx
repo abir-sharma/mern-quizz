@@ -5,7 +5,7 @@ import { getquizzes } from '../../actions/userActions'
 import { useEffect } from 'react'
 
 const Admin = () => {
-  const { quizzes } = useSelector(
+  const { quizzes,login } = useSelector(
     (state) => state.appInfo
   );
   const dispatch=useDispatch()
@@ -22,16 +22,17 @@ const Admin = () => {
       <div class="fw-bold">{quizz.quizname}</div>
       {quizz.quizdescription}
     </div>
-    <Link to={`/quizz/${quizz._id}`}><span class="badge bg-primary rounded-pill mx-2">View</span>
-</Link>
+    {login.user.role=='admin'? <Link to={`/${quizz._id}`}><span class="badge bg-primary rounded-pill mx-2">View</span>
+</Link>:<></>}
+    
 <Link to={`/playQuizz/${quizz._id}`}><span class="badge bg-success rounded-pill">Play quizz</span>
 </Link>
   </li>
 </ol>
     </div>)}    
     <div className="container">
-    <Link to="/createQuizz" ><button class="btn btn-lg btn-primary my-2 mx-2" type="submit">Create quizz</button>
-</Link>
+      {login.user.role=='admin'? <Link to="/createQuizz" ><button class="btn btn-lg btn-primary my-2 mx-2" type="submit">Create quizz</button>
+</Link>:<></>}
     </div>
     
    </>

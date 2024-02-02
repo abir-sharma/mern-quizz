@@ -19,6 +19,7 @@ export const registerUser=(userInfo)=>async(dispatch)=>{
 export const loginUser=(userInfo)=>async(dispatch)=>{
     try {
         const {data}=await api.login(userInfo)
+        console.log(data,"s")
         dispatch({
             type:"loginUser",
             payload:data
@@ -75,6 +76,7 @@ export const getquizzes=()=>async(dispatch)=>{
 export const getQuizzD=(id)=>async(dispatch)=>{
     try {
         const {data}=await api.getQuizzDetails(id)
+        console.log(data,"tt")
         dispatch({
             type:"getQuizzD",
             payload:data

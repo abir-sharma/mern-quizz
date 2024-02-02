@@ -7,7 +7,9 @@ export const appReducer=createReducer({createQuizz:{},quizzes:[],quizzDetails:{}
     },
     loginUser:(state,action)=>{
         state.login=action.payload
-        state.isLoggedIn=true
+        console.log(action.payload,"aaa")
+        console.log(state.login,"ddd")
+        if (state.login.success) state.isLoggedIn=true
     },
     logoutUser:(state,action)=>{
         state.logout=action.payload
@@ -20,6 +22,7 @@ export const appReducer=createReducer({createQuizz:{},quizzes:[],quizzDetails:{}
         state.createQuizz=action.payload
     },
     getQuizzD:(state,action)=>{
+        console.log("ss")
         state.quizzDetails=action.payload
     }
 })

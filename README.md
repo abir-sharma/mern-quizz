@@ -13,3 +13,11 @@ Database -
            ]
 Postman collection - https://www.getpostman.com/collections/e7e985d851ad12735713
 All routes are auth protected with some routes only for admin.
+
+Functions - 
+(for user only) register, login, logout, play quizz.
+(for admin) register(one time), login, logout , play quizz, view quizz, create quizz.
+questions can be of multicoreect type as well as single correct.
+quizz starts with mid difficulty level for coreect ans +5 diffculty +1 for -ve ans -2 difficulty -1.
+quizz ends.
+A graph of no.of attempts vs score will show and result.

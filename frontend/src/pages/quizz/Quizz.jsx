@@ -6,16 +6,19 @@ import { useEffect } from 'react';
 
 const Quizz = () => {
   const {id}=useParams()
-  const { quizzDetails } = useSelector(
-    (state) => state.appInfo
-  );
   const dispatch=useDispatch()
   useEffect(() => {
     dispatch(getQuizzD(id))
   }, [id])
+  const { quizzDetails } = useSelector(
+    (state) => state.appInfo
+  );
+  console.log(quizzDetails.quizz,"dd") 
   if (!quizzDetails.quizz) {
+    console.log("first")
     return null
-  }  
+  } 
+  
   return (
     <>
     <div className="container my-4">
