@@ -61,6 +61,7 @@ const PlayQuizz = () => {
   }
   const q=quizzDetails.quizz.questions[difficultyLevel]
   const correctAns=quizzDetails.quizz.questions[difficultyLevel].answers
+  console.log(correctAns,checked)
   function Right(correctAns,checked){
     if (correctAns === checked) return true;
     if (correctAns == null || checked == null) return false;

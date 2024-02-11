@@ -13,9 +13,7 @@ const Quizz = () => {
   const { quizzDetails } = useSelector(
     (state) => state.appInfo
   );
-  console.log(quizzDetails.quizz,"dd") 
   if (!quizzDetails.quizz) {
-    console.log("first")
     return null
   } 
   

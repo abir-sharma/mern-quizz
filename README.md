@@ -21,3 +21,8 @@ questions can be of multicoreect type as well as single correct.
 quizz starts with mid difficulty level for coreect ans +5 diffculty +1 for -ve ans -2 difficulty -1.
 quizz ends.
 A graph of no.of attempts vs score will show and result.
+
+backend - render
+frontend - netlify
+
+d3js

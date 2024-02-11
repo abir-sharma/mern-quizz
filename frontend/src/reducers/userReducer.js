@@ -8,6 +8,9 @@ export const appReducer=createReducer({createQuizz:{},quizzes:[],quizzDetails:{}
     loginUser:(state,action)=>{
         state.login=action.payload
         if (state.login.success) state.isLoggedIn=true
+        // cookieParser.removeItem("localhost")
+        document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
     },
     logoutUser:(state,action)=>{
         state.logout=action.payload
@@ -20,7 +23,6 @@ export const appReducer=createReducer({createQuizz:{},quizzes:[],quizzDetails:{}
         state.createQuizz=action.payload
     },
     getQuizzD:(state,action)=>{
-        console.log("ss")
         state.quizzDetails=action.payload
     }
 })
